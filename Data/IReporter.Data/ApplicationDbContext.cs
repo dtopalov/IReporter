@@ -16,9 +16,11 @@
         {
         }
 
-        public IDbSet<Joke> Jokes { get; set; }
+        public IDbSet<Article> Articles { get; set; }
 
-        public IDbSet<JokeCategory> JokesCategories { get; set; }
+        public IDbSet<Comment> Comments { get; set; }
+
+        public IDbSet<Category> Categories { get; set; }
 
         public static ApplicationDbContext Create()
         {

@@ -12,7 +12,7 @@
         public static void Main()
         {
             var db = new ApplicationDbContext();
-            var repo = new DbRepository<JokeCategory>(db);
+            var repo = new DbRepository<Category>(db);
             var categoriesService = new CategoriesService(repo);
 
             var configuration = Configuration.Default.WithDefaultLoader();
@@ -22,13 +22,13 @@
             {
                 var url = $"http://vicove.com/vic-{i}";
                 var document = browsingContext.OpenAsync(url).Result;
-                var jokeContent = document.QuerySelector("#content_box .post-content").TextContent.Trim();
-                if (!string.IsNullOrWhiteSpace(jokeContent))
+                var articleContent = document.QuerySelector("#content_box .post-content").TextContent.Trim();
+                if (!string.IsNullOrWhiteSpace(articleContent))
                 {
                     var categoryName = document.QuerySelector("#content_box .thecategory a").TextContent.Trim();
                     var category = categoriesService.EnsureCategory(categoryName);
-                    var joke = new Joke { Category = category, Content = jokeContent };
-                    db.Jokes.Add(joke);
+                    var article = new Article { Category = category, Content = articleContent };
+                    db.Articles.Add(article);
                     db.SaveChanges();
                     Console.WriteLine(i);
                 }

@@ -36,10 +36,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticlesService.cs" />
     <Compile Include="CategoriesService.cs" />
+    <Compile Include="IArticlesService.cs" />
     <Compile Include="ICategoriesService.cs" />
-    <Compile Include="IJokesService.cs" />
-    <Compile Include="JokesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
     using IReporter.Data.Models;
     using IReporter.Web.Infrastructure.Mapping;
 
-    public class JokeCategoryViewModel : IMapFrom<JokeCategory>
+    public class CategoryViewModel : IMapFrom<Category>
     {
         public int Id { get; set; }
 

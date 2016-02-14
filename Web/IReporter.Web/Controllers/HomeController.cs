@@ -9,29 +9,29 @@
 
     public class HomeController : BaseController
     {
-        private readonly IJokesService jokes;
-        private readonly ICategoriesService jokeCategories;
+        private readonly IArticlesService articles;
+        private readonly ICategoriesService categories;
 
         public HomeController(
-            IJokesService jokes,
-            ICategoriesService jokeCategories)
+            IArticlesService articles,
+            ICategoriesService categories)
         {
-            this.jokes = jokes;
-            this.jokeCategories = jokeCategories;
+            this.articles = articles;
+            this.categories = categories;
         }
 
         public ActionResult Index()
         {
-            var jokes = this.jokes.GetRandomJokes(3).To<JokeViewModel>().ToList();
-            var categories =
+            var allArticles = this.articles.GetAll().To<ArticleViewModel>().ToList();
+            var allCategories =
                 this.Cache.Get(
                     "categories",
-                    () => this.jokeCategories.GetAll().To<JokeCategoryViewModel>().ToList(),
+                    () => this.categories.GetAll().To<CategoryViewModel>().ToList(),
                     30 * 60);
             var viewModel = new IndexViewModel
             {
-                Jokes = jokes,
-                Categories = categories
+                Articles = allArticles,
+                Categories = allCategories
             };
 
             return this.View(viewModel);
