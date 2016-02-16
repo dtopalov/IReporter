@@ -15,7 +15,7 @@
             this.articles = articles;
         }
 
-        public ActionResult ById(int id)
+        public ActionResult ById(string id)
         {
             var article = this.articles.GetById(id);
             var viewModel = this.Mapper.Map<ArticleViewModel>(article);

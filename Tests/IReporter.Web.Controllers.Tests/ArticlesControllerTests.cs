@@ -21,10 +21,10 @@
             autoMapperConfig.Execute(typeof(ArticlesController).Assembly);
             const string ArticleContent = "SomeContent";
             var articlesServiceMock = new Mock<IArticlesService>();
-            articlesServiceMock.Setup(x => x.GetById(It.IsAny<int>()))
+            articlesServiceMock.Setup(x => x.GetById(It.IsAny<string>()))
                 .Returns(new Article { Content = ArticleContent, Category = new Category { Name = "asda" } });
             var controller = new ArticlesController(articlesServiceMock.Object);
-            controller.WithCallTo(x => x.ById(1))
+            controller.WithCallTo(x => x.ById("asdasasd"))
                 .ShouldRenderView("ById")
                 .WithModel<ArticleViewModel>(
                     viewModel =>

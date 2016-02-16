@@ -13,5 +13,17 @@
         public const string LastNameDisplayName = "Last name";
 
         public const string DefaultImageUrl = "~/Content/images/article-writing.jpg";
+
+        public const string AdministratorUserName = "admin@admin.com";
+
+        public const string RegularUserUserName = "user@user.com";
+
+        public const string AuthorUserName = "author@author.com";
+
+        public const string AdministratorPassword = AdministratorUserName;
+
+        public const string RegularUserPassword = RegularUserUserName;
+
+        public const string AuthorPassword = AuthorUserName;
     }
 }

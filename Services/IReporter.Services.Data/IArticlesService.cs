@@ -8,7 +8,7 @@
     {
         IQueryable<Article> GetAll();
 
-        Article GetById(int id);
+        Article GetById(string id);
     }
 }
 

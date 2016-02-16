@@ -5,13 +5,18 @@
 <h1>Вицове</h1>
 @Html.Kendo().DatePicker().Name("test")
 <div class="row">
-    @foreach (var joke in Model.Jokes)
+    @foreach (var article in Model.Articles)
     {
         <div class="col-md-4">
-            <a href="@joke.Url">
-                @Html.Raw(joke.Content.Replace("\n", "<br />"))
-            </a>
-            <div>@joke.Category</div>
+            <div>
+                <h3>@article.Title</h3>
+                <p>@article.Excerpt</p>
+                @foreach (var c in article.Comments)
+                {
+                    <span>@c.Author.UserName</span>
+                }
+            </div>   
+            <div>@article.Category</div>
         </div>
     }
 </div>
