@@ -28,5 +28,16 @@
             var article = this.articles.GetById(intId);
             return article;
         }
+
+        public void Update(Article article)
+        {
+            this.articles.Update(article);
+            this.Save();
+        }
+
+        public void Save()
+        {
+            this.articles.Save();
+        }
     }
 }

@@ -12,7 +12,7 @@
 
         public const string LastNameDisplayName = "Last name";
 
-        public const string DefaultImageUrl = "~/Content/images/article-writing.jpg";
+        public const string DefaultImageUrl = "article-writing.jpg";
 
         public const string AdministratorUserName = "admin@admin.com";
 

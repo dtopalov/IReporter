@@ -91,6 +91,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin.Security.Google, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -204,9 +208,13 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleDetailsController.cs" />
+    <Compile Include="Controllers\ArticleTabStripController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\HomeGridController.cs" />
+    <Compile Include="Controllers\HomeTabStripController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,6 +230,7 @@
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Home\AuthorViewModel.cs" />
+    <Compile Include="ViewModels\Home\CommentViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Home\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Home\ArticleViewModel.cs" />
@@ -318,8 +327,29 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
-    <Content Include="Views\Jokes\ById.cshtml" />
+    <Content Include="Views\ArticleDetails\Index.cshtml" />
     <None Include="Views\Articles\ById.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\HomeTabStrip\_MostReadArticles.cshtml" />
+    <Content Include="Views\HomeTabStrip\_MostLikedArticles.cshtml" />
+    <Content Include="Views\HomeTabStrip\_Weather.cshtml" />
+    <Content Include="Views\HomeTabStrip\_MostCommentedArticles.cshtml" />
+    <Content Include="Views\HomeTabStrip\_NewestArticles.cshtml" />
+    <Content Include="Views\ArticleTabStrip\_MostReadArticles.cshtml" />
+    <Content Include="Views\ArticleTabStrip\_MostLikedArticles.cshtml" />
+    <Content Include="Views\ArticleTabStrip\_NewestArticles.cshtml" />
+    <Content Include="Views\ArticleTabStrip\_MostCommentedArticles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,6 +357,7 @@
     <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="Content\images\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\HomeGrid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

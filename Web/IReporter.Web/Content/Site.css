@@ -9,16 +9,36 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+img {
+    border: 1px solid white;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+td > img {
+    margin: 0;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.special-link {
+    position: absolute;
+    top: 16px;
+    left: -6px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}
+
+#article-comments th.k-header {
+    padding: 0 10px;
 }

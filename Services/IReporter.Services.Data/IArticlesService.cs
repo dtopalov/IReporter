@@ -9,6 +9,9 @@
         IQueryable<Article> GetAll();
 
         Article GetById(string id);
+
+        void Update(Article article);
+
+        void Save();
     }
 }
-

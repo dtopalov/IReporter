@@ -1,31 +1,51 @@
-﻿@model IReporter.Web.ViewModels.Home.IndexViewModel
+﻿@using IReporter.Web.ViewModels.Home
+@model IndexViewModel
 @{
     ViewBag.Title = "Home Page";
 }
-<h1>Вицове</h1>
-@Html.Kendo().DatePicker().Name("test")
+<h2>Top News</h2>
 <div class="row">
-    @foreach (var article in Model.Articles)
-    {
-        <div class="col-md-4">
-            <div>
-                <h3>@article.Title</h3>
-                <p>@article.Excerpt</p>
-                @foreach (var c in article.Comments)
-                {
-                    <span>@c.Author.UserName</span>
-                }
-            </div>   
-            <div>@article.Category</div>
-        </div>
-    }
+    <div class="col-md-8">
+        @(Html.Kendo().TabStrip().Name("tabstrip").Animation(animation => animation.Open(effect => effect.Fade(FadeDirection.In))).Items(tabstrip =>
+              {
+                  tabstrip.Add().Text("Most read").LoadContentFrom("GetMostRead", "HomeTabStrip");
+
+                  tabstrip.Add().Text("Most liked").LoadContentFrom("GetMostLiked", "HomeTabStrip");
+
+                  tabstrip.Add().Text("Most Commented").LoadContentFrom("GetMostCommented", "HomeTabStrip");
+
+                  tabstrip.Add().Text("Latest").LoadContentFrom("GetNewest", "HomeTabStrip");
+
+                  tabstrip.Add().Text("Weather")
+                            .Content(@<text>@Html.Partial("../HomeTabStrip/_Weather")</text>)
+                            .ContentHtmlAttributes(new { style = "text-align:center;" });
+              })
+              .Events(e => e.ContentLoad("setTabStripHeight"))
+        )
+    </div>
 </div>
-<h1>Категории</h1>
-<div class="row">
-    @foreach (var category in Model.Categories)
-    {
-        <div class="col-md-2">
-            @category.Name
-        </div>
-    }
-</div>
+<h2>All News</h2>
+@(Html.Kendo().Grid<ArticleViewModel>()
+        .Name("HomeArticlesGrid")
+        .Columns(cols =>
+        {
+            cols.Bound(c => c.PrimaryImageUrl).ClientTemplate(@"<a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'><img src='../../Content/Images/#:PrimaryImageUrl#' width=200 height=150></a>").Sortable(false).Width(220);
+            cols.Bound(c => c.Content).Title("News").ClientTemplate(
+                @"<h3><a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'>#:Title#</a></h3>
+                    <small>#=kendo.toString(CreatedOn, 'dd/M/yyyy H:mm')# by #=Author.FirstName# #=Author.LastName#</small>
+                    <p>#=Excerpt# <a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'><span class='glyphicon glyphicon-plus-sign'></span> read more</a></p>");
+            cols.Bound(c => c.CreatedOn).Format("{0:dd/MM/yyyy}");
+        })
+        .Pageable()
+        .DataSource(d => d.Ajax()
+            .PageSize(5)
+            .Read(read => read.Action("GetAll", "HomeGrid"))
+            .Model(model => model.Id(m => m.Id))))
+
+@section Scripts{
+    <script>
+        function setTabStripHeight(e) {
+            e.sender.wrapper.find('.k-content').height('100%');
+        }
+    </script>
+}

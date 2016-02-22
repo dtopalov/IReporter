@@ -1,0 +1,9 @@
+﻿@model IEnumerable<IReporter.Web.ViewModels.Home.ArticleViewModel>
+@{
+    int index = 1;
+}
+
+@foreach (var article in Model)
+{
+    <h4>@(index++). <a href="/articles/@article.Id-@article.Title.Replace("/[^a-zA-Z0-9]/g", "-")">@article.Title</a> <small>by @article.Author.FirstName @article.Author.LastName Comments: @article.Comments.Count()</small></h4>                                                                                                                                     
+}

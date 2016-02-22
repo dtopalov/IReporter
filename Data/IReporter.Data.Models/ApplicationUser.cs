@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -36,8 +34,9 @@
         public string LastName { get; set; }
 
         [Required]
-        [Range(typeof(DateTime), "1900/01/01", "2020/12/31")]
-        public DateTime BirthDate { get; set; }
+
+        // [Range(typeof(DateTime), "1/1/1900", "31/12/2020")]
+        public DateTime? BirthDate { get; set; }
 
         public virtual ICollection<Article> Articles {
             get

@@ -1,0 +1,28 @@
+﻿
+ <script>
+    var w = 325,
+        h = 200,
+        s = 5,
+        c = 4,
+        l = [100727011, 100726050, 100728193, 100732770, 100727523, 100725993];
+
+     function test(i) {
+         var u = 'http://sinoptik.bg/widget/';
+         var r = encodeURIComponent(document.URL.substring(0, 512));
+         $('#tabstrip-5').html('<iframe width="' + w + '" height="' + h + '" src="' + u + l[i] + '/' + s + '/' + w + '/' + h + '/' + c + '?url=' + r + '" scrolling="no" frameborder="0" allowtransparency="true"></iframe>');
+     }
+
+     var index = 0,
+         len = l.length;
+
+     setInterval(function () {
+         test(index);
+         if (index === len - 1) {
+             index = 0;
+         } else {
+             index++;
+         }
+     }, 5000);
+
+ </script>
+

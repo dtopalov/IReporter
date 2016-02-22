@@ -28,6 +28,7 @@
                     "categories",
                     () => this.categories.GetAll().To<CategoryViewModel>().ToList(),
                     30 * 60);
+            var ip = this.Request.UserHostAddress;
             var viewModel = new IndexViewModel
             {
                 Articles = allArticles,

@@ -1,0 +1,31 @@
+﻿@model IReporter.Web.ViewModels.Home.ArticleViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>@Model.Title</h2>
+        <div><span>by @Model.Author.FirstName @Model.Author.LastName, published at @($"{Model.CreatedOn:f}")</span></div>
+        <div>@Html.Raw(@Model.Content)</div>
+        <hr />
+        @(Html.Kendo().Grid(Model.Comments).Name("article-comments").Columns(columns =>
+              { columns.Bound(c => c.Content).ClientTemplate(@"<div>#=Content#</div><span><small>By #=Author# at #=kendo.toString(CreatedOn, 'dd/M/yyyy H:mm')#</small></span>").Title("<h4>Comments</h4>"); }).Pageable().DataSource(d => d.Ajax().PageSize(5).Sort(sort => sort.Add("CreatedOn").Descending()))
+        )
+    </div>
+    <div class="col-md-3">
+        <h4>More from @Model.Category</h4>
+        @(Html.Kendo().TabStrip().Name("tabstrip-category").Animation(animation => animation.Open(effect => effect.Fade(FadeDirection.In))).Items(tabstrip =>
+              {
+                  tabstrip.Add().Text("Latest").Selected(true).LoadContentFrom(Url.Content("~/ArticleTabStrip/GetNewest/" + @Model.Category));
+
+                  tabstrip.Add().Text("Most read").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostRead/" + @Model.Category));
+
+                  tabstrip.Add().Text("Most liked").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostLiked/" + @Model.Category));
+
+                  tabstrip.Add().Text("Most Commented").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostCommented/" + @Model.Category));
+              })
+              .HtmlAttributes(new { style = "height: 300px;" })
+        )
+    </div>
+</div>
