@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using IReporter.Common
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,14 +26,22 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><span class="glyphicon glyphicon-home special-link"></span>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, null)</li>
-                <li><span class="fa fa-futbol-o special-link"></span>@Html.ActionLink("Sport", "Sport", "ByCategory", new { area = string.Empty }, null)</li>
-                <li><span class="glyphicon glyphicon-music special-link"></span>@Html.ActionLink("Music", "Music", "ByCategory", new { area = string.Empty }, null)</li>
-                <li><span class="fa fa-university special-link"></span>@Html.ActionLink("Politics", "Politics", "ByCategory", new { area = string.Empty }, null)</li>
-                <li><span class="glyphicon glyphicon-glass special-link"></span>@Html.ActionLink("Entertainment", "Entertainment", "ByCategory", new { area = string.Empty }, null)</li>
-                <li><span class="glyphicon glyphicon-briefcase special-link"></span>@Html.ActionLink("Business", "Business", "ByCategory", new { area = string.Empty }, null)</li>
-                <li><span class="glyphicon glyphicon-cog special-link"></span>@Html.ActionLink("Tech", "Tech", "ByCategory", new { area = string.Empty }, null)</li>
-                <li><span class="fa fa-comments-o special-link"></span>@Html.ActionLink("Gossip", "Gossip", "ByCategory", new { area = string.Empty }, null)</li>
-                <li><span class="glyphicon glyphicon-film special-link"></span>@Html.ActionLink("Cinema", "Cinema", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="fa fa-futbol-o special-link"></span>@Html.ActionLink(GlobalConstants.SportCategoryName, GlobalConstants.SportCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-music special-link"></span>@Html.ActionLink(GlobalConstants.MusicCategoryName, GlobalConstants.MusicCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="fa fa-university special-link"></span>@Html.ActionLink(GlobalConstants.PoliticsCategoryName, GlobalConstants.PoliticsCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-glass special-link"></span>@Html.ActionLink(GlobalConstants.EntertainmentCategoryName, GlobalConstants.EntertainmentCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-briefcase special-link"></span>@Html.ActionLink(GlobalConstants.BusinessCategoryName, GlobalConstants.BusinessCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-cog special-link"></span>@Html.ActionLink(GlobalConstants.TechCategoryName, GlobalConstants.TechCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="fa fa-comments-o special-link"></span>@Html.ActionLink(GlobalConstants.GossipCategoryName, GlobalConstants.GossipCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-film special-link"></span>@Html.ActionLink(GlobalConstants.CinemaCategoryName, GlobalConstants.CinemaCategoryName, "ByCategory", new { area = string.Empty }, null)</li>
+                @if (this.User.IsInRole(GlobalConstants.AuthorRoleName))
+                {
+                    <li><span class="glyphicon glyphicon-pencil special-link"></span>@Html.ActionLink(GlobalConstants.EditorsAreaName, "AddArticle", GlobalConstants.EditorsAreaName, new { area = GlobalConstants.EditorsAreaName }, null)</li>
+                }
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    <li><span class="glyphicon glyphicon-th-list special-link"></span>@Html.ActionLink(GlobalConstants.AdministratorsAreaName, "Index", GlobalConstants.AdministratorsAreaName, new { area = GlobalConstants.AdministratorsAreaName }, null)</li>
+                }
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

@@ -12,6 +12,8 @@
 
         void Update(Article article);
 
+        void Create(Article article);
+
         void Save();
     }
 }

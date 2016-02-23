@@ -1,0 +1,38 @@
+﻿@using IReporter.Web.Areas.Administration.Models
+
+@(Html.Kendo().Grid<ArticleEditModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Title).Width(120);
+          columns.Bound(c => c.PrimaryImageUrl).Width(150);
+          columns.Bound(c => c.Excerpt).Width(600).ClientTemplate("#=Excerpt.substring(0, 100)#...").EditorTemplateName("ExcerptTemplate");
+          columns.Bound(c => c.Content).Width(1200).ClientTemplate("#=Content.substring(Content.indexOf('>'), 200)#...").EditorTemplateName("ContentTemplate");
+          columns.Bound(c => c.Category).EditorTemplateName("CategoriesTemplate").Width(220);
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Scrollable()
+      .HtmlAttributes(new { style = "height: 900px" })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .ServerOperation(false)
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("ArticlesRead", "Articles"))
+          .Create(create => create.Action("ArticleViewModels_Create", "Articles"))
+          .Update(update => update.Action("ArticlesUpdate", "Articles"))
+          .Destroy(destroy => destroy.Action("ArticleViewModels_Destroy", "Articles"))
+      )
+)
+

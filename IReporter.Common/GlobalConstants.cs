@@ -41,5 +41,9 @@
         public const string BusinessCategoryName = "Business";
 
         public const string CinemaCategoryName = "Cinema";
+
+        public const string EditorsAreaName = "Editors";
+
+        public const string AdministratorsAreaName = "Administration";
     }
 }

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Menu";
+}
+
+<h2>@ViewBag.Title</h2>
+@(Html.Kendo().TabStrip()
+        .Name("admin-tabstrip")
+        .Animation(animation => animation.Open(effect => effect.Fade(FadeDirection.In)))
+        .Items(tabstrip =>
+              {
+                  tabstrip.Add().Text("Articles").Selected(true).LoadContentFrom("AllArticles", "Articles");
+
+                  tabstrip.Add().Text("Comments").LoadContentFrom("GetAllComments", "Comments");
+
+                  tabstrip.Add().Text("Users").LoadContentFrom("GetAllUsers", "Users");
+              }))

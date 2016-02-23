@@ -35,6 +35,12 @@
             this.Save();
         }
 
+        public void Create(Article article)
+        {
+            this.articles.Add(article);
+            this.Save();
+        }
+
         public void Save()
         {
             this.articles.Save();

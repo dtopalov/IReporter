@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -25,6 +26,8 @@
         public string Content { get; set; }
 
         public string Category { get; set; }
+
+        public int CategoryId { get; set; }
 
         public int Rating { get; set; }
 
