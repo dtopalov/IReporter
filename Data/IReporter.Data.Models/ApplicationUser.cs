@@ -17,11 +17,14 @@
     {
         private ICollection<Article> articles;
 
-        private ICollection<Comment> comments; 
+        private ICollection<Comment> comments;
+
+        private ICollection<Vote> votes;
 
         public ApplicationUser()
         {
             this.articles = new HashSet<Article>();
+            this.votes = new HashSet<Vote>();
             this.comments = new HashSet<Comment>();
         }
 
@@ -33,12 +36,10 @@
         [StringLength(maximumLength: 30, ErrorMessage = "{0} should be between {2} and {1} characters long.", MinimumLength = 2)]
         public string LastName { get; set; }
 
-        [Required]
-
-        // [Range(typeof(DateTime), "1/1/1900", "31/12/2020")]
         public DateTime? BirthDate { get; set; }
 
-        public virtual ICollection<Article> Articles {
+        public virtual ICollection<Article> Articles
+        {
             get
             {
                 return this.articles;
@@ -50,7 +51,8 @@
             }
         }
 
-        public virtual ICollection<Comment> Comments {
+        public virtual ICollection<Comment> Comments
+        {
             get
             {
                 return this.comments;
@@ -59,6 +61,19 @@
             set
             {
                 this.comments = value;
+            }
+        }
+
+        public virtual ICollection<Vote> Votes
+        {
+            get
+            {
+                return this.votes;
+            }
+
+            set
+            {
+                this.votes = value;
             }
         }
 

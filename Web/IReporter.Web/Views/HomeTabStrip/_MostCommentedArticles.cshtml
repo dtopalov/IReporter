@@ -1,9 +1,11 @@
-﻿@model IEnumerable<IReporter.Web.ViewModels.Home.ArticleViewModel>
+﻿@using System.Text.RegularExpressions
+@model IEnumerable<IReporter.Web.ViewModels.Home.ArticleViewModel>
 @{
     int index = 1;
+    var pattern = new Regex("[^a-zA-Z0-9]");
 }
 
 @foreach (var article in Model)
 {
-    <h4>@(index++). <a href="/articles/@article.Id-@article.Title.Replace("/[^a-zA-Z0-9]/g", "-")">@article.Title</a> <small>by @article.Author.FirstName @article.Author.LastName Comments: @article.Comments.Count()</small></h4>                                                                                                                                     
+    <h4>@(index++). <a href="/articles/@article.Id-@pattern.Replace(@article.Title, "-")">@article.Title</a> <small>by @article.Author.FirstName @article.Author.LastName Comments: @article.Comments.Count()</small></h4>                                                                                                                                     
 }

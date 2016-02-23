@@ -36,8 +36,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VotesService.cs" />
+    <Compile Include="CommentsService.cs" />
     <Compile Include="ArticlesService.cs" />
     <Compile Include="CategoriesService.cs" />
+    <Compile Include="IVotesService.cs" />
+    <Compile Include="ICommentsService.cs" />
     <Compile Include="IArticlesService.cs" />
     <Compile Include="ICategoriesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

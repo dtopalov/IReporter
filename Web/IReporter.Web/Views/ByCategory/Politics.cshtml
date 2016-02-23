@@ -1,0 +1,25 @@
+﻿@using IReporter.Common
+@using IReporter.Web.ViewModels.Home
+@model System.Collections.Generic.List<IReporter.Web.ViewModels.Home.ArticleViewModel>
+
+@{
+    ViewBag.Title = GlobalConstants.PoliticsCategoryName;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@(Html.Kendo().Grid<ArticleViewModel>()
+        .Name("PoliticsArticlesGrid")
+        .Columns(cols =>
+        {
+            cols.Bound(c => c.PrimaryImageUrl).ClientTemplate(@"<a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'><img src='../../Content/Images/#:PrimaryImageUrl#' width=200 height=150></a>").Sortable(false).Width(220);
+            cols.Bound(c => c.Content).Title("News").ClientTemplate(
+                @"<h3><a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'>#:Title#</a></h3>
+                    <small>#=kendo.toString(CreatedOn, 'dd/M/yyyy H:mm')# by #=Author.FirstName# #=Author.LastName#</small>
+                    <p>#=Excerpt# <a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'><span class='glyphicon glyphicon-plus-sign'></span> read more</a></p>");
+            cols.Bound(c => c.NumberOfViews).ClientTemplate(@"<span class='glyphicon glyphicon-eye-open'></span><h4>#= NumberOfViews#</h4>").Title("Views").Width(150);
+        })
+        .Pageable()
+        .DataSource(d => d.Ajax()
+            .PageSize(5)
+            .Read(read => read.Action("GetAllPolitics", "ByCategory")).Model(model => model.Id(m => m.Id))))

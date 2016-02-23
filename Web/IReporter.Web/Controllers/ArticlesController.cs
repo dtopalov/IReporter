@@ -3,7 +3,7 @@
     using System.Web.Mvc;
 
     using IReporter.Services.Data;
-    using IReporter.Web.ViewModels.Home;
+    using ViewModels.Home;
 
     public class ArticlesController : BaseController
     {

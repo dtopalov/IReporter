@@ -3,13 +3,10 @@
     using IReporter.Data.Models;
     using IReporter.Services.Data;
     using IReporter.Web.Infrastructure.Mapping;
-    using IReporter.Web.ViewModels.Home;
-
     using Moq;
-
     using NUnit.Framework;
-
     using TestStack.FluentMVCTesting;
+    using ViewModels.Home;
 
     [TestFixture]
     public class ArticlesControllerTests

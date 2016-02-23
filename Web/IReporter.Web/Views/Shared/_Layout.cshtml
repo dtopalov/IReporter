@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - MvcTemplate</title>
+    <title>@ViewBag.Title - IReporter</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/kendo/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,6 +25,14 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><span class="glyphicon glyphicon-home special-link"></span>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, null)</li>
+                <li><span class="fa fa-futbol-o special-link"></span>@Html.ActionLink("Sport", "Sport", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-music special-link"></span>@Html.ActionLink("Music", "Music", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="fa fa-university special-link"></span>@Html.ActionLink("Politics", "Politics", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-glass special-link"></span>@Html.ActionLink("Entertainment", "Entertainment", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-briefcase special-link"></span>@Html.ActionLink("Business", "Business", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-cog special-link"></span>@Html.ActionLink("Tech", "Tech", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="fa fa-comments-o special-link"></span>@Html.ActionLink("Gossip", "Gossip", "ByCategory", new { area = string.Empty }, null)</li>
+                <li><span class="glyphicon glyphicon-film special-link"></span>@Html.ActionLink("Cinema", "Cinema", "ByCategory", new { area = string.Empty }, null)</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

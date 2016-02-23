@@ -5,7 +5,7 @@
 
     using IReporter.Services.Data;
     using IReporter.Web.Infrastructure.Mapping;
-    using IReporter.Web.ViewModels.Home;
+    using ViewModels.Home;
 
     public class HomeController : BaseController
     {
@@ -28,7 +28,7 @@
                     "categories",
                     () => this.categories.GetAll().To<CategoryViewModel>().ToList(),
                     30 * 60);
-            var ip = this.Request.UserHostAddress;
+
             var viewModel = new IndexViewModel
             {
                 Articles = allArticles,

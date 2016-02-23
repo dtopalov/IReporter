@@ -10,7 +10,7 @@
 }
 
 img {
-    border: 1px solid white;
+    border: 1px solid #fff;
     display: inline-block;
     float: left;
     margin-right: 10px;
@@ -31,6 +31,10 @@ h3 {
     left: -6px;
 }
 
+.nav > li:hover {
+    color: #fff;
+}
+
 a {
     text-decoration: none !important;
 }
@@ -41,4 +45,31 @@ a:hover {
 
 #article-comments th.k-header {
     padding: 0 10px;
+}
+
+th span.k-link h4 {
+    padding: 0;
+    margin: 0;
+}
+
+#votes-count {
+    display: inline-block;
+}
+
+#up, #down {
+    font-size: 1.5em;
+}
+
+#up:hover, #down:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+#voting-block {
+    border: 1px solid #2a9fd6;
+    border-radius: 5px;
+    width: 130px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 5px 0 0 0;
 }

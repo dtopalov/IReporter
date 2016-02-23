@@ -121,7 +121,7 @@
                         AuthorId = author.Id,
                         CategoryId = (i % this.categories.Count) + 1,
                         PrimaryImageUrl = GlobalConstants.DefaultImageUrl,
-                        Content = $"<img src=\"{GlobalConstants.DefaultImageUrl}\" alt=\"Default image\" width=\"500\" height=\"350\" />"
+                        Content = $"<img src=\"../../Content/images/{GlobalConstants.DefaultImageUrl}\" alt=\"Default image\" width=\"500\" height=\"350\" />"
                                                     + $"Some random content. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
                                                     + $"doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi "
                                                     + $"architecto beatae vitae dicta sunt explicabo.<br /><br />Nemo enim ipsam voluptatem quia voluptas sit aspernatur "

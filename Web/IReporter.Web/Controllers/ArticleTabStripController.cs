@@ -5,7 +5,7 @@
 
     using IReporter.Services.Data;
     using IReporter.Web.Infrastructure.Mapping;
-    using IReporter.Web.ViewModels.Home;
+    using ViewModels.Home;
 
     public class ArticleTabStripController : BaseController
     {
@@ -34,7 +34,7 @@
             var mostLikedArticles =
                  this.articles.GetAll()
                      .Where(a => a.Category.Name == id)
-                     .OrderByDescending(a => a.Rating)
+                     .OrderByDescending(a => a.Votes.Sum(x => x.Value))
                      .To<ArticleViewModel>()
                      .Take(5)
                      .ToList();

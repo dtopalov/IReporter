@@ -1,31 +1,84 @@
-﻿@model IReporter.Web.ViewModels.Home.ArticleViewModel
+﻿@model IReporter.Web.ViewModels.ArticleDetails.ArticleWithCommentsViewModel
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = Model.Article.Title;
+    TempData["Url"] = this.Request.Url.AbsolutePath;
 }
 
 <div class="row">
     <div class="col-md-9">
-        <h2>@Model.Title</h2>
-        <div><span>by @Model.Author.FirstName @Model.Author.LastName, published at @($"{Model.CreatedOn:f}")</span></div>
-        <div>@Html.Raw(@Model.Content)</div>
-        <hr />
-        @(Html.Kendo().Grid(Model.Comments).Name("article-comments").Columns(columns =>
-              { columns.Bound(c => c.Content).ClientTemplate(@"<div>#=Content#</div><span><small>By #=Author# at #=kendo.toString(CreatedOn, 'dd/M/yyyy H:mm')#</small></span>").Title("<h4>Comments</h4>"); }).Pageable().DataSource(d => d.Ajax().PageSize(5).Sort(sort => sort.Add("CreatedOn").Descending()))
-        )
+        <h2>@Model.Article.Title</h2>
+        <div><span>by @Model.Article.Author.FirstName @Model.Article.Author.LastName, published at @($"{Model.Article.CreatedOn:f}")</span></div>
+        <div>@Html.Raw(@Model.Article.Content)</div>
+        <hr/>
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <div id="voting-block">
+                <h5>Rating:</h5>
+                @if (!Model.Article.CurrentUserHasVoted)
+                {
+                    <span id="down" class="glyphicon glyphicon-thumbs-down"></span>
+                }
+                <h3 id="votes-count">@Model.Article.Rating</h3>
+                @if (!Model.Article.CurrentUserHasVoted)
+                {
+                    <span id="up" class="glyphicon glyphicon-thumbs-up"></span>
+                }
+                else
+                {
+                    <p>*You have voted for this article</p>
+                }
+            </div>
+            using (Ajax.BeginForm("PostComment", "Comments", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "grid-container", OnComplete = "clearEditor"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Kendo().EditorFor(e => e.Comment.Content).Encode(false)
+                @Html.HiddenFor(e => e.Comment.ArticleId, htmlAttributes: new { @Value = Model.Article.Id })
+                <input type="submit" value="Submit comment" class="btn btn-primary"/>
+            }
+        }
+        <hr/>
+        <div id="grid-container">@Html.Partial("../Comments/_CommentsGrid", Model.Article.Id)</div>
     </div>
     <div class="col-md-3">
-        <h4>More from @Model.Category</h4>
+        <h4>More from @Model.Article.Category</h4>
         @(Html.Kendo().TabStrip().Name("tabstrip-category").Animation(animation => animation.Open(effect => effect.Fade(FadeDirection.In))).Items(tabstrip =>
               {
-                  tabstrip.Add().Text("Latest").Selected(true).LoadContentFrom(Url.Content("~/ArticleTabStrip/GetNewest/" + @Model.Category));
+                  tabstrip.Add().Text("Latest").Selected(true).LoadContentFrom(Url.Content("~/ArticleTabStrip/GetNewest/" + @Model.Article.Category));
 
-                  tabstrip.Add().Text("Most read").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostRead/" + @Model.Category));
+                  tabstrip.Add().Text("Most read").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostRead/" + @Model.Article.Category));
 
-                  tabstrip.Add().Text("Most liked").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostLiked/" + @Model.Category));
+                  tabstrip.Add().Text("Most liked").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostLiked/" + @Model.Article.Category));
 
-                  tabstrip.Add().Text("Most Commented").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostCommented/" + @Model.Category));
-              })
-              .HtmlAttributes(new { style = "height: 300px;" })
-        )
+                  tabstrip.Add().Text("Most Commented").LoadContentFrom(Url.Content("~/ArticleTabStrip/GetMostCommented/" + @Model.Article.Category));
+              }).HtmlAttributes(new { style = "height: 300px;" })
+              )
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        $(function() {
+            var url = new URL(location);
+            var articleId = +url.pathname.substring(url.pathname.lastIndexOf('/') + 1, url.pathname.indexOf('-'));
+            $('#up').click(function() {
+                vote(1);
+            });
+            $('#down').click(function() {
+                vote(-1);
+            });
+
+            function vote(value) {
+                $.post(
+                    '/Votes/ProcessVote',
+                    { "value": value, "articleId": articleId },
+                    function(data) {
+                        console.log(data);
+                        $('#votes-count').text(data.value);
+                        $('#up').hide();
+                        $('#down').hide();
+                    });
+            }
+        });
+    </script>
+}

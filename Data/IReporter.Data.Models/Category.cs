@@ -15,7 +15,8 @@
 
         public string Name { get; set; }
 
-        public virtual ICollection<Article> Articles {
+        public virtual ICollection<Article> Articles
+        {
             get
             {
                 return this.articles;

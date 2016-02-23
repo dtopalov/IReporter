@@ -1,0 +1,17 @@
+﻿@using IReporter.Web.ViewModels.Home
+@model int
+
+@(Html.Kendo().Grid<CommentViewModel>().Name("article-comments")
+    .Columns(columns =>
+              { columns.Bound(c => c.Content).ClientTemplate(@"<div>#=Content#</div><span><small>By #=Author# at #=kendo.toString(CreatedOn, 'dd/M/yyyy H:mm')#</small></span>")
+    .Title("<h4>Comments</h4>"); })
+    .Pageable()
+    .DataSource(
+        d => d.Ajax()
+        .PageSize(5)
+        .Read(read => read.Action("GetArticleComments/" + Model, "Comments"))
+        .Model(model => model.Id(m => m.Id))
+        .Sort(sort => sort.Add("CreatedOn")
+        .Descending())
+        .ServerOperation(false))
+)

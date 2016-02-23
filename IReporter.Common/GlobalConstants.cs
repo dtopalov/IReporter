@@ -25,5 +25,21 @@
         public const string RegularUserPassword = RegularUserUserName;
 
         public const string AuthorPassword = AuthorUserName;
+
+        public const string SportCategoryName = "Sport";
+
+        public const string MusicCategoryName = "Music";
+
+        public const string PoliticsCategoryName = "Politics";
+
+        public const string EntertainmentCategoryName = "Entertainment";
+
+        public const string GossipCategoryName = "Gossip";
+
+        public const string TechCategoryName = "Tech";
+
+        public const string BusinessCategoryName = "Business";
+
+        public const string CinemaCategoryName = "Cinema";
     }
 }
