@@ -1,19 +1,16 @@
 ﻿namespace IReporter.Web.Areas.Administration.Controllers
 {
-    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
-
     using IReporter.Common;
-    using IReporter.Data;
     using IReporter.Data.Models;
     using IReporter.Services.Data;
-    using IReporter.Web.Areas.Administration.Models;
     using IReporter.Web.Controllers;
     using IReporter.Web.Infrastructure.Mapping;
     using IReporter.Web.ViewModels.Home;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
+    using Models;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class ArticlesController : BaseController
@@ -40,34 +37,13 @@
 
         public ActionResult ArticlesRead([DataSourceRequest]DataSourceRequest request)
         {
-            var allArticles = this.articles.GetAll().OrderByDescending(x => x.CreatedOn).To<ArticleEditModel>();
+            var allArticles = this.articles.GetAllWithDeleted()
+                .OrderByDescending(x => x.CreatedOn)
+                .To<ArticleEditModel>()
+                .ToList();
 
             return this.Json(allArticles.ToDataSourceResult(request));
         }
-
-        //[HttpPost]
-        //public ActionResult ArticleViewModels_Create([DataSourceRequest]DataSourceRequest request, Article articleViewModel)
-        //{
-        //    if (this.ModelState.IsValid)
-        //    {
-        //        var entity = new Article
-        //        {
-        //            Title = articleViewModel.Title,
-        //            PrimaryImageUrl = articleViewModel.PrimaryImageUrl,
-        //            Excerpt = articleViewModel.Excerpt,
-        //            Content = articleViewModel.Content,
-        //            Category = articleViewModel.Category,
-        //            NumberOfViews = articleViewModel.NumberOfViews,
-        //            CreatedOn = articleViewModel.CreatedOn
-        //        };
-
-        //        this.articles.Create(entity);
-
-        //        articleViewModel.Id = entity.Id;
-        //    }
-
-        //    return Json(new[] { articleViewModel }.ToDataSourceResult(request, ModelState));
-        //}
 
         [HttpPost]
         public ActionResult ArticlesUpdate([DataSourceRequest]DataSourceRequest request, ArticleEditModel article)
@@ -90,37 +66,41 @@
             return this.Json(new[] { article }.ToDataSourceResult(request, this.ModelState));
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //public ActionResult ArticleViewModels_Destroy([DataSourceRequest]DataSourceRequest request, ArticleViewModel articleViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var entity = new ArticleViewModel
-        //        {
-        //            Id = articleViewModel.Id,
-        //            Title = articleViewModel.Title,
-        //            PrimaryImageUrl = articleViewModel.PrimaryImageUrl,
-        //            Excerpt = articleViewModel.Excerpt,
-        //            Content = articleViewModel.Content,
-        //            Category = articleViewModel.Category,
-        //            Rating = articleViewModel.Rating,
-        //            NumberOfViews = articleViewModel.NumberOfViews,
-        //            CurrentUserHasVoted = articleViewModel.CurrentUserHasVoted,
-        //            CreatedOn = articleViewModel.CreatedOn
-        //        };
+        [HttpPost]
+        public ActionResult ArticlesCreate([DataSourceRequest]DataSourceRequest request, ArticleEditModel article)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var newArticle = new Article
+                                     {
+                                         CategoryId = int.Parse(article.Category),
+                                         Content = article.Content,
+                                         Excerpt = article.Excerpt,
+                                         PrimaryImageUrl = article.PrimaryImageUrl,
+                                         Title = article.Title
+                                     };
 
-        //        db.ArticleViewModels.Attach(entity);
-        //        db.ArticleViewModels.Remove(entity);
-        //        db.SaveChanges();
-        //    }
+                this.articles.Create(newArticle);
+            }
 
-        //    return Json(new[] { articleViewModel }.ToDataSourceResult(request, ModelState));
-        //}
+            return this.Json(new[] { article }.ToDataSourceResult(request, this.ModelState));
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    articles.Dispose();
-        //    base.Dispose(disposing);
-        //}
+        [HttpPost]
+        public ActionResult ArticlesDelete([DataSourceRequest]DataSourceRequest request, ArticleEditModel article)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var originalArticle = this.articles.GetAll().FirstOrDefault(a => a.Id == article.Id);
+                if (originalArticle != null)
+                {
+                    originalArticle.IsDeleted = true;
+                }
+
+                this.articles.Update(originalArticle);
+            }
+
+            return this.Json(new[] { article }.ToDataSourceResult(request, this.ModelState));
+        }
     }
 }

@@ -22,7 +22,7 @@
 
         public ActionResult Index()
         {
-            var allArticles = this.articles.GetAll().To<ArticleViewModel>().ToList();
+            var allArticles = this.articles.GetAll().OrderByDescending(a => a.CreatedOn).To<ArticleViewModel>().ToList();
             var allCategories =
                 this.Cache.Get(
                     "categories",

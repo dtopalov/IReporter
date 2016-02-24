@@ -1,0 +1,8 @@
+﻿@using System.Collections
+@model IReporter.Web.Areas.Administration.Models.ArticleEditModel
+
+@(Html.Kendo().DropDownListFor(m => m)
+        .DataValueField("Id")
+        .DataTextField("Title")
+        .BindTo((IEnumerable)ViewData["articles"])
+)

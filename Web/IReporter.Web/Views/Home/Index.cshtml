@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<h2>Top News</h2>
-<div class="row">
-    <div class="col-md-8">
-        @(Html.Kendo().TabStrip().Name("tabstrip").Animation(animation => animation.Open(effect => effect.Fade(FadeDirection.In))).Items(tabstrip =>
+@section Top{
+    <h2>Top News</h2>
+    <div class="row">
+        <div class="col-md-12">
+            @(Html.Kendo().TabStrip().Name("tabstrip").Animation(animation => animation.Open(effect => effect.Fade(FadeDirection.In))).Items(tabstrip =>
               {
                   tabstrip.Add().Text("Most read").LoadContentFrom("GetMostRead", "HomeTabStrip");
 
@@ -21,9 +22,10 @@
                             .ContentHtmlAttributes(new { style = "text-align:center;" });
               })
               .Events(e => e.ContentLoad("setTabStripHeight"))
-        )
+            )
+        </div>
     </div>
-</div>
+}
 <h2>All News</h2>
 @(Html.Kendo().Grid<ArticleViewModel>()
         .Name("HomeArticlesGrid")

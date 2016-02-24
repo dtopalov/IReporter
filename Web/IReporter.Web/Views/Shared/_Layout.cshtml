@@ -48,6 +48,11 @@
     </div>
 </div>
 <div class="container body-content">
+    @if (this.TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@this.TempData["Success"]</div>
+    }
+    @RenderSection("top", required: false)
     @RenderBody()
     <hr/>
     <footer>

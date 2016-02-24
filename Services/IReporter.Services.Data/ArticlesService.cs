@@ -22,6 +22,11 @@
             return this.articles.All();
         }
 
+        public IQueryable<Article> GetAllWithDeleted()
+        {
+            return this.articles.AllWithDeleted();
+        }
+
         public Article GetById(string id)
         {
             var intId = this.identifierProvider.DecodeId(id);

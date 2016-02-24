@@ -14,6 +14,11 @@
             this.categories = categories;
         }
 
+        public IQueryable<Category> GetAllWithDeleted()
+        {
+            return this.categories.AllWithDeleted();
+        }
+
         public Category EnsureCategory(string name)
         {
             var category = this.categories.All().FirstOrDefault(x => x.Name == name);

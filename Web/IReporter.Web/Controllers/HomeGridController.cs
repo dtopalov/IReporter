@@ -21,7 +21,7 @@
 
         public ActionResult GetAll([DataSourceRequest] DataSourceRequest request)
         {
-            var allArticles = this.articles.GetAll().OrderByDescending(x => x.CreatedOn).To<ArticleViewModel>();
+            var allArticles = this.articles.GetAll().OrderByDescending(x => x.CreatedOn).To<ArticleViewModel>().ToList();
 
             return this.Json(allArticles.ToDataSourceResult(request));
         }

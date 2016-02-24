@@ -1,5 +1,6 @@
 ﻿namespace IReporter.Web.Areas.Administration.Models
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
@@ -17,6 +18,7 @@
         [StringLength(maximumLength: 100, ErrorMessage = "{0} must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Title { get; set; }
 
+        [DisplayName("Primary Image Url")]
         public string PrimaryImageUrl { get; set; }
 
         [Required]
@@ -30,9 +32,12 @@
         public string Content { get; set; }
 
         [Required]
+        [DisplayName("Category")]
         public int CategoryId { get; set; }
 
         public string Category { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public void CreateMappings(IMapperConfiguration configuration)
         {

@@ -35,7 +35,7 @@
                 {
                     vote.Value = 1;
                 }
-                else if(vote.Value < -1)
+                else if (vote.Value < -1)
                 {
                     vote.Value = -1;
                 }

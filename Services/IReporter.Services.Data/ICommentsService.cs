@@ -8,6 +8,8 @@
     {
         IQueryable<Comment> GetAll();
 
+        IQueryable<Comment> GetAllWithDeleted();
+
         Comment GetById(int id);
 
         void Update(Comment article);

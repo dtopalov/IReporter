@@ -1,0 +1,43 @@
+﻿@using IReporter.Web.ViewModels.Home
+@using Kendo.Mvc.UI
+@using Microsoft.AspNet.Identity
+@model IReporter.Web.Areas.Administration.Models.ArticleEditModel
+
+@{
+    ViewBag.Title = "Add article";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("AddArticle", "Editors"))
+{
+    @Html.AntiForgeryToken()
+    @Html.LabelFor(m => m.Title)
+    <br />
+    @Html.TextBoxFor(m => m.Title, new {@class="form-control"})
+    @Html.ValidationMessageFor(m => m.Title)
+    <br />
+    @Html.LabelFor(m => m.PrimaryImageUrl)
+    @Html.TextBoxFor(m => m.PrimaryImageUrl, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.PrimaryImageUrl)
+    <br />
+    @Html.LabelFor(m => m.Excerpt)
+    @Html.Kendo().EditorFor(m => m.Excerpt).Encode(false)
+    @Html.ValidationMessageFor(m => m.Excerpt)
+    <br />
+    @Html.LabelFor(m => m.Content)
+    @Html.Kendo().EditorFor(m => m.Content).Encode(false)
+    @Html.ValidationMessageFor(m => m.Content)
+    <br />
+    @Html.LabelFor(m => m.CategoryId)
+    <br />
+    @(Html.Kendo().DropDownListFor(m => m.CategoryId)
+        .DataValueField("Id")
+        .DataTextField("Name")
+        .BindTo((IEnumerable<CategoryViewModel>)this.ViewData["categories"]))
+    @Html.ValidationMessageFor(m => m.CategoryId)
+    <br/>
+    <br />
+    <input type="Submit" class="btn btn-primary" />
+}
+

@@ -8,6 +8,8 @@
     {
         IQueryable<Vote> GetAll();
 
+        IQueryable<Vote> GetAllWithDeleted();
+
         Vote GetById(int id);
 
         void Update(Vote article);

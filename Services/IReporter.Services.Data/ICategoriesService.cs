@@ -8,6 +8,8 @@
     {
         IQueryable<Category> GetAll();
 
+        IQueryable<Category> GetAllWithDeleted();
+
         Category EnsureCategory(string name);
     }
 }

@@ -4,7 +4,6 @@
 
     using IReporter.Data.Common;
     using IReporter.Data.Models;
-    using IReporter.Services.Web;
 
     public class CommentsService : ICommentsService
     {
@@ -18,6 +17,11 @@
         public IQueryable<Comment> GetAll()
         {
             return this.comments.All();
+        }
+
+        public IQueryable<Comment> GetAllWithDeleted()
+        {
+            return this.comments.AllWithDeleted();
         }
 
         public Comment GetById(int id)

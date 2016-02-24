@@ -8,6 +8,8 @@
     {
         IQueryable<Article> GetAll();
 
+        IQueryable<Article> GetAllWithDeleted();
+
         Article GetById(string id);
 
         void Update(Article article);

@@ -17,7 +17,7 @@
                 @"<h3><a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'>#:Title#</a></h3>
                     <small>#=kendo.toString(CreatedOn, 'dd/M/yyyy H:mm')# by #=Author.FirstName# #=Author.LastName#</small>
                     <p>#=Excerpt# <a href='/articles/#=Id#-#=Title.replace(/[^a-zA-Z0-9]/g,'-')#'><span class='glyphicon glyphicon-plus-sign'></span> read more</a></p>");
-            cols.Bound(c => c.NumberOfViews).Title("<h4><span class=\"fa fa-list\"></span></h4>").ClientTemplate(@"<span class='glyphicon glyphicon-eye-open'></span><h4>#= NumberOfViews#</h4>").Title("Views").Width(150);
+            cols.Bound(c => c.NumberOfViews).Title("<h4><span class=\"glyphicon glyphicon-eye-open\"></span></h4>").ClientTemplate(@"<span class='glyphicon glyphicon-eye-open'></span><h4>#= NumberOfViews#</h4>").Width(150);
         })
         .Pageable()
         .DataSource(d => d.Ajax()

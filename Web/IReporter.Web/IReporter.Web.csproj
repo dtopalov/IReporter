@@ -223,14 +223,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
+    <Compile Include="Areas\Administration\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Administration\Models\ArticleEditModel.cs" />
     <Compile Include="Areas\Administration\Controllers\ArticlesController.cs" />
+    <Content Include="Areas\Administration\Views\Comments\_AllComments.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\ArticlesTemplate.cshtml" />
     <None Include="Areas\Administration\Views\Shared\EditorTemplates\CategoriesTemplate.cshtml" />
+    <Compile Include="Areas\Administration\Models\CommentEditModel.cs" />
     <Compile Include="Areas\Editors\Controllers\EditorsController.cs" />
     <Compile Include="Areas\Editors\EditorsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleDetailsController.cs" />
     <Compile Include="Controllers\ArticleTabStripController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\VotesController.cs" />
     <Compile Include="ViewModels\ArticleDetails\ArticleWithCommentsViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -316,6 +321,7 @@
     <Content Include="Areas\Administration\Views\Articles\_AllArticles.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\ExcerptTemplate.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\ContentTemplate.cshtml" />
+    <Content Include="Areas\Editors\Views\Editors\AddArticle.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -398,10 +404,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Editors\Models\" />
-    <Folder Include="Areas\Editors\Views\Editors\" />
     <Folder Include="Areas\Editors\Views\Shared\" />
     <Folder Include="Content\images\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Error\" />
     <Folder Include="Views\HomeGrid\" />
     <Folder Include="Views\Sport\" />
     <Folder Include="Views\Votes\" />

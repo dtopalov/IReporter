@@ -34,7 +34,23 @@
                 return this.View("Error");
             }
 
-            this.currentArticleId = int.Parse(route.Substring(0, route.IndexOf("-", StringComparison.Ordinal)));
+            bool success;
+            try
+            {
+                success = int.TryParse(route.Substring(0, route.IndexOf("-", StringComparison.Ordinal)), out this.currentArticleId);
+            }
+            catch (Exception)
+            {
+                this.TempData["ErrorMessage"] = "No such article!";
+                return this.View("Error");
+            }
+
+            if (!success)
+            {
+                this.TempData["ErrorMessage"] = "No such article!";
+                return this.View("Error");
+            }
+
             var currentStringId = this.identifierProvider.EncodeId(this.currentArticleId);
             var currentArticle = this.articles.GetById(currentStringId);
             if (currentArticle == null)
@@ -48,7 +64,7 @@
             this.articles.Update(currentArticle);
 
             ArticleViewModel currentArticleViewModel = this.Mapper.Map<ArticleViewModel>(currentArticle);
-            // currentArticleViewModel.Id = this.currentArticleId;
+
             currentArticleViewModel.CurrentUserHasVoted =
                 currentArticle.Votes.Any(v => v.AuthorId == this.User.Identity.GetUserId());
 

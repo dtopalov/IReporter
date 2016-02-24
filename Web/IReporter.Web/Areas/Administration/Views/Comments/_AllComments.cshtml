@@ -1,0 +1,36 @@
+﻿@using IReporter.Web.Areas.Administration.Models
+
+@(Html.Kendo().Grid<CommentEditModel>()
+      .Name("grid-comments")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.IsDeleted).Title("X").ClientTemplate("#=IsDeleted ? true : false #").Width(80);
+          columns.Bound(c => c.Article).EditorTemplateName("ArticlesTemplate").Width(200);
+          columns.Bound(c => c.Content).Width(700).ClientTemplate("#=Content.substring(0, 200)#...").EditorTemplateName("ContentTemplate");
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Scrollable()
+      .HtmlAttributes(new { style = "height: 950px" })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .ServerOperation(false)
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("CommentsRead", "Comments"))
+          .Create(create => create.Action("CommentsCreate", "Comments"))
+          .Update(update => update.Action("CommentsUpdate", "Comments"))
+          .Destroy(destroy => destroy.Action("CommentsDelete", "Comments"))
+      )
+)
+

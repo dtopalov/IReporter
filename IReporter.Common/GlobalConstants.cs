@@ -45,5 +45,9 @@
         public const string EditorsAreaName = "Editors";
 
         public const string AdministratorsAreaName = "Administration";
+
+        public const string GlobalErrorMessage = "Quit messing around!";
+
+        public const string ThankYouMessage = "Thank you!";
     }
 }

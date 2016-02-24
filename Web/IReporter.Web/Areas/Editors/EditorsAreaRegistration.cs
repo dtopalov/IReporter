@@ -1,18 +1,17 @@
-﻿using System.Web.Mvc;
-
-namespace IReporter.Web.Areas.Editors
+﻿namespace IReporter.Web.Areas.Editors
 {
-    public class EditorsAreaRegistration : AreaRegistration 
+    using System.Web.Mvc;
+
+    public class EditorsAreaRegistration : AreaRegistration
     {
         public override string AreaName => "Editors";
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Editors_default",
                 "Editors/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new { action = "Index", id = UrlParameter.Optional });
         }
     }
 }

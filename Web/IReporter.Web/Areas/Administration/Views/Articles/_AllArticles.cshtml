@@ -3,13 +3,14 @@
 @(Html.Kendo().Grid<ArticleEditModel>()
       .Name("grid")
       .Columns(columns =>
-      {
-          columns.Bound(c => c.Title).Width(120);
-          columns.Bound(c => c.PrimaryImageUrl).Width(150);
-          columns.Bound(c => c.Excerpt).Width(600).ClientTemplate("#=Excerpt.substring(0, 100)#...").EditorTemplateName("ExcerptTemplate");
-          columns.Bound(c => c.Content).Width(1200).ClientTemplate("#=Content.substring(Content.indexOf('>'), 200)#...").EditorTemplateName("ContentTemplate");
-          columns.Bound(c => c.Category).EditorTemplateName("CategoriesTemplate").Width(220);
-          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+          {
+              columns.Bound(c => c.IsDeleted).Title("X").ClientTemplate("#=IsDeleted ? true : false #").Width(100);
+              columns.Bound(c => c.Title).Width(120);
+              columns.Bound(c => c.PrimaryImageUrl).Width(150);
+              columns.Bound(c => c.Excerpt).Width(600).ClientTemplate("#=Excerpt.substring(0, 100)#...").EditorTemplateName("ExcerptTemplate");
+              columns.Bound(c => c.Content).Width(1200).ClientTemplate("#=Content.substring(Content.indexOf('>'), 200)#...").EditorTemplateName("ContentTemplate");
+              columns.Bound(c => c.Category).EditorTemplateName("CategoriesTemplate").Width(220);
+              columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
       })
       .ToolBar(toolbar =>
       {
@@ -30,9 +31,9 @@
           .ServerOperation(false)
           .Model(model => model.Id(p => p.Id))
           .Read(read => read.Action("ArticlesRead", "Articles"))
-          .Create(create => create.Action("ArticleViewModels_Create", "Articles"))
+          .Create(create => create.Action("ArticlesCreate", "Articles"))
           .Update(update => update.Action("ArticlesUpdate", "Articles"))
-          .Destroy(destroy => destroy.Action("ArticleViewModels_Destroy", "Articles"))
+          .Destroy(destroy => destroy.Action("ArticlesDelete", "Articles"))
       )
 )
 

@@ -20,6 +20,11 @@
             return this.votes.All();
         }
 
+        public IQueryable<Vote> GetAllWithDeleted()
+        {
+            return this.votes.AllWithDeleted();
+        }
+
         public Vote GetById(int id)
         {
             return this.votes.GetById(id);
