@@ -18,12 +18,12 @@
     using Microsoft.AspNet.Identity;
     using ViewModels.Comment;
 
-    public class CommentsController : BaseController
+    public class ArticleCommentsController : BaseController
     {
         private readonly ICommentsService comments;
         private readonly ISanitizer sanitizer = new Sanitizer();
 
-        public CommentsController(ICommentsService comments)
+        public ArticleCommentsController(ICommentsService comments)
         {
             this.comments = comments;
         }

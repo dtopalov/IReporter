@@ -28,7 +28,7 @@
                     <p>*You have voted for this article</p>
                 }
             </div>
-            using (Ajax.BeginForm("PostComment", "Comments", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "grid-container", OnComplete = "clearEditor"}))
+            using (Ajax.BeginForm("PostComment", "ArticleComments", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "grid-container"}))
             {
                 @Html.AntiForgeryToken()
                 @Html.Kendo().EditorFor(e => e.Comment.Content).Encode(false)
@@ -37,7 +37,7 @@
             }
         }
         <hr/>
-        <div id="grid-container">@Html.Partial("../Comments/_CommentsGrid", Model.Article.Id)</div>
+        <div id="grid-container">@Html.Partial("../ArticleComments/_CommentsGrid", Model.Article.Id)</div>
     </div>
     <div class="col-md-3">
         <h4>More from @Model.Article.Category</h4>

@@ -240,7 +240,7 @@
     <Compile Include="ViewModels\ArticleDetails\ArticleWithCommentsViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="ViewModels\Comment\CommentPostModel.cs" />
-    <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\ArticleCommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeGridController.cs" />
@@ -399,7 +399,7 @@
     <Content Include="Views\ByCategory\Gossip.cshtml" />
     <Content Include="Views\ByCategory\Business.cshtml" />
     <Content Include="Views\ByCategory\Cinema.cshtml" />
-    <Content Include="Views\Comments\_CommentsGrid.cshtml" />
+    <Content Include="Views\ArticleComments\_CommentsGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

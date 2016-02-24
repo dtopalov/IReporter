@@ -9,7 +9,7 @@
     .DataSource(
         d => d.Ajax()
         .PageSize(5)
-        .Read(read => read.Action("GetArticleComments/" + Model, "Comments"))
+        .Read(read => read.Action("GetArticleComments/" + Model, "ArticleComments"))
         .Model(model => model.Id(m => m.Id))
         .Sort(sort => sort.Add("CreatedOn")
         .Descending())
